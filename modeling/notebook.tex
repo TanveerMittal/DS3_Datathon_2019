@@ -1,0 +1,1026 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{01\_multiclass\_waydegg}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \hypertarget{petbreed-multiclassification}{%
+\section{Petbreed
+Multiclassification}\label{petbreed-multiclassification}}
+
+    Try out the working classifier on our live web app!
+
+https://mypetbreed.onrender.com/
+
+\textbf{See the complete writeup of how we used Azure VM, Web Dev, and
+Machine Learning with TF \& Fastai at the bottom of this notebook!}
+
+After prototyping different ideas, we figured out what model
+architechture worked best from using Azure Data Science VM with how
+quickly we were able to get it set up. In order to train at images at a
+higher resolution and batch size, we moved over to train our final
+production model on
+\href{https://waydegg.github.io/making-a-dl-server.html\#making-a-dl-server}{Wayde's
+Deep Learning Rig} so we wouldn't have to spend any money for
+GPU/storage.
+
+Shoutout to George for getting our model working live on the web!
+Checkout the Azure VM work and Web App source code on our Github
+repository: https://github.com/TanveerMittal/DS3\_Datathon\_2019
+
+    We'll start with loading in the Fastai Deep Learning library, as it's
+what Wayde's most comfortable using. Tanveer's models with Tensorflow
+2.0 were used for reference.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}73}]:} \PY{o}{\PYZpc{}}\PY{k}{reload\PYZus{}ext} autoreload
+         \PY{o}{\PYZpc{}}\PY{k}{autoreload} 2
+         \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}74}]:} \PY{k+kn}{from} \PY{n+nn}{fastai}\PY{n+nn}{.}\PY{n+nn}{vision} \PY{k}{import} \PY{o}{*}
+\end{Verbatim}
+
+
+    Since there are multiple GPU's in the DL Rig, we have to specify which
+one to train on.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}75}]:} \PY{n}{torch}\PY{o}{.}\PY{n}{cuda}\PY{o}{.}\PY{n}{set\PYZus{}device}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Using GPU\PYZsh{}}\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{torch.cuda.current\PYZus{}device()\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Using GPU\#0
+
+    \end{Verbatim}
+
+    \hypertarget{configuration}{%
+\subsection{Configuration}\label{configuration}}
+
+    Next we'll configure our path's and setup some parameters we'll be
+changing throughout the training process to scale the model with
+increasing image resolution.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}76}]:} \PY{n}{PATH} \PY{o}{=} \PY{n}{Path}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{TRAIN} \PY{o}{=} \PY{n}{PATH}\PY{o}{/}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{train}\PY{l+s+s1}{\PYZsq{}}
+         \PY{n}{TEST} \PY{o}{=} \PY{n}{PATH}\PY{o}{/}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{test}\PY{l+s+s1}{\PYZsq{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}100}]:} \PY{c+c1}{\PYZsh{} bs,sz = 128,32}
+          \PY{c+c1}{\PYZsh{} bs,sz = 64,64}
+          \PY{c+c1}{\PYZsh{} bs,sz = 32,128}
+          \PY{c+c1}{\PYZsh{} bs,sz = 16,256}
+          \PY{n}{bs}\PY{p}{,}\PY{n}{sz} \PY{o}{=} \PY{l+m+mi}{8}\PY{p}{,}\PY{l+m+mi}{512}
+          
+          \PY{n}{prefix} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{med\PYZus{}}\PY{l+s+s2}{\PYZdq{}}
+\end{Verbatim}
+
+
+    \hypertarget{data-prep}{%
+\subsection{Data Prep}\label{data-prep}}
+
+    Before anything, we need to prepare our data for modeling. With how the
+raw files are structured, the steps we'll need to take are:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Match image files to breed names. Since the file names are just
+  numbers and the breed names are IDs in a csv, we need to make a
+  function that pairs the two together for when we setup our
+  \href{https://docs.fast.ai/data_block.html}{Databunch}.
+\item
+  Upsample imageset. Since we're limited to train with only a few
+  thousand images in total, our training and validation accuracy should
+  increase if we have more data to train with. Because of this, we can
+  duplicate our training set several times to ``artificially'' get a
+  bigger dataset. We'll avoid overfitting by appying unique image
+  transforms to all these images so that each image is different than
+  the rest, increasing the generalization of our model.
+\item
+  Create a databunch. Using Fastai's Datablock API, we'll create a
+  databunch that uses our labeling function and upsampled dataset to
+  split our training dataset into training and validation subsets. We'll
+  also apply image transforms using Fastai's \texttt{vision.transform}
+  package.
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}78}]:} \PY{n}{PATH}\PY{o}{.}\PY{n}{ls}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}78}]:} [PosixPath('data/train.csv'),
+          PosixPath('data/sampleSubmission\_breed.csv'),
+          PosixPath('data/export.pkl'),
+          PosixPath('data/models'),
+          PosixPath('data/large'),
+          PosixPath('data/ucsd-2019-datathon.zip'),
+          PosixPath('data/train'),
+          PosixPath('data/test'),
+          PosixPath('data/image.zip')]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}79}]:} \PY{n}{train\PYZus{}df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{n}{PATH}\PY{o}{/}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{train.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{engine}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{python}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{train\PYZus{}df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}79}]:}    breedID  speciesID  fname                  breed\_name
+         0       23          2      0                newfoundland
+         1       35          2      1  staffordshire bull terrier
+         2       19          2      2                    keeshond
+         3        2          2      3            american bulldog
+         4       29          2      4               saint bernard
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}80}]:} \PY{n}{train\PYZus{}df}\PY{o}{.}\PY{n}{breed\PYZus{}name}\PY{o}{.}\PY{n}{unique}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}80}]:} array(['newfoundland', 'staffordshire bull terrier', 'keeshond', 'american bulldog', 'saint bernard', 'Russian Blue',
+                'Bengal', 'yorkshire terrier', 'samoyed', 'beagle', 'miniature pinscher', 'Persian', 'scottish terrier', 'pug',
+                'shiba inu', 'pomeranian', 'great pyrenees', 'boxer', 'Sphynx', 'Bombay', 'Egyptian Mau',
+                'english cocker spaniel', 'havanese', 'Ragdoll', 'german shorthaired', 'British Shorthair', 'english setter',
+                'japanese chin', 'Birman', 'chihuahua', 'leonberger', 'wheaten terrier', 'Siamese', 'Abyssinian',
+                'basset hound', 'Maine Coon', 'american pit bull terrier'], dtype=object)
+\end{Verbatim}
+            
+    \hypertarget{upsampling}{%
+\subsubsection{Upsampling}\label{upsampling}}
+
+    Lets cycle through our Training set 5 times to generate a bigger
+dataset:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{LARGE} \PY{o}{=} \PY{n}{PATH}\PY{o}{/}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{large}\PY{l+s+s1}{\PYZsq{}}
+         \PY{n}{LARGE}\PY{o}{.}\PY{n}{mkdir}\PY{p}{(}\PY{n}{exist\PYZus{}ok}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}124}]:} \PY{o}{\PYZpc{}\PYZpc{}time}
+          \PY{n}{amt} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{listdir}\PY{p}{(}\PY{n}{TRAIN}\PY{p}{)}
+          \PY{n}{amt\PYZus{}len} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{amt}\PY{p}{)}
+          \PY{n}{mult\PYZus{}amt} \PY{o}{=} \PY{l+m+mi}{5}
+          \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{1}
+          
+          \PY{k}{while} \PY{n}{i} \PY{o}{\PYZlt{}} \PY{n}{mult\PYZus{}amt}\PY{p}{:}
+              \PY{n}{n} \PY{o}{=} \PY{l+m+mi}{0}
+              \PY{k}{while} \PY{n}{n} \PY{o}{\PYZlt{}} \PY{n}{amt\PYZus{}len}\PY{p}{:}
+                  \PY{n}{amt}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{amt}\PY{p}{[}\PY{n}{n}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{4}\PY{p}{]} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZus{}copy\PYZus{}}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{i}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.jpg}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                  \PY{n}{os}\PY{o}{.}\PY{n}{system}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cp }\PY{l+s+si}{\PYZob{}TRAIN\PYZcb{}}\PY{l+s+s1}{/}\PY{l+s+si}{\PYZob{}amt[n]\PYZcb{}}\PY{l+s+s1}{ }\PY{l+s+si}{\PYZob{}LARGE\PYZcb{}}\PY{l+s+s1}{/}\PY{l+s+si}{\PYZob{}amt[n][:\PYZhy{}4]\PYZcb{}}\PY{l+s+s1}{\PYZus{}copy\PYZus{}}\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{str(i)\PYZcb{}.jpg}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                  \PY{n}{n}\PY{o}{+}\PY{o}{=}\PY{l+m+mi}{1}
+                  \PY{k}{if} \PY{n}{n}\PY{o}{\PYZpc{}}\PY{l+m+mi}{250} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:}
+                      \PY{n+nb}{print}\PY{p}{(}\PY{n}{n}\PY{p}{)}
+              \PY{n}{i}\PY{o}{+}\PY{o}{=}\PY{l+m+mi}{1}
+              
+\end{Verbatim}
+
+
+    \hypertarget{datablock}{%
+\subsubsection{Datablock}\label{datablock}}
+
+    Below is our labeling function for matching image file names with breed
+ids. We will input this into our databunch when we create it later:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}84}]:} \PY{c+c1}{\PYZsh{} Labeling function used by Datablock API}
+         \PY{k}{def} \PY{n+nf}{get\PYZus{}labels}\PY{p}{(}\PY{n}{fname}\PY{p}{)}\PY{p}{:}    
+             \PY{n}{fname} \PY{o}{=} \PY{n+nb}{str}\PY{p}{(}\PY{n}{fname}\PY{p}{)} \PY{c+c1}{\PYZsh{} Convert path object to string}
+             \PY{n}{fname} \PY{o}{=} \PY{n}{fname}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{n}{sep}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{/}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             
+             \PY{k}{if} \PY{n}{fname}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{train}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}
+                 \PY{n}{fname} \PY{o}{=} \PY{n}{fname}\PY{p}{[}\PY{n+nb}{len}\PY{p}{(}\PY{n}{fname}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}\PY{p}{]}
+                 \PY{n}{fname} \PY{o}{=} \PY{n}{fname}\PY{p}{[}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{4}\PY{p}{]}
+         
+                 \PY{n}{row} \PY{o}{=} \PY{n}{train\PYZus{}df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{train\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fname}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{n+nb}{int}\PY{p}{(}\PY{n}{fname}\PY{p}{)}\PY{p}{]}
+                 \PY{n}{label} \PY{o}{=} \PY{n}{row}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{breed\PYZus{}name}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+                 
+             \PY{k}{if} \PY{n}{fname}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{large}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}
+                 \PY{n}{fname} \PY{o}{=} \PY{n}{fname}\PY{p}{[}\PY{n+nb}{len}\PY{p}{(}\PY{n}{fname}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}\PY{p}{]}
+                 \PY{n}{fname} \PY{o}{=} \PY{n}{fname}\PY{p}{[}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{11}\PY{p}{]}
+         
+                 \PY{n}{row} \PY{o}{=} \PY{n}{train\PYZus{}df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{train\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fname}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{n+nb}{int}\PY{p}{(}\PY{n}{fname}\PY{p}{)}\PY{p}{]}
+                 \PY{n}{label} \PY{o}{=} \PY{n}{row}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{breed\PYZus{}name}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+                 
+             \PY{k}{return} \PY{n}{label}
+\end{Verbatim}
+
+
+    \textbf{Fastai Base Transforms}
+
+We'll be using Fastai's \texttt{get\_transforms()} funtion get a set of
+image transforms. Because our dataset is pictures of animals, we'll be
+using transforms that would generate new images that we could
+potentially see in the other 70\% of the test set:
+
+\begin{itemize}
+\tightlist
+\item
+  do\_flip: if True, a random flip is applied with probability 0.5
+\item
+  flip\_vert: requires do\_flip=True. If True, the image can be flipped
+  vertically or rotated of 90 degrees, otherwise only an h orizontal
+  flip is applied
+\item
+  max\_rotate: if not None, a random rotation between -max\_rotate and
+  max\_rotate degrees is applied with probability p\_affine
+\item
+  max\_zoom: if not 1. or less, a random zoom betweem 1. and max\_zoom
+  is applied with probability p\_affine
+\item
+  max\_lighting: if not None, a random lightning and contrast change
+  controlled by max\_lighting is applied with probability p\_lighting
+\item
+  max\_warp: if not None, a random symmetric warp of magnitude between
+  -max\_warp and maw\_warp is applied with probability p\_affine
+\item
+  p\_affine: the probability that each affine transform and symmetric
+  warp is applied
+\item
+  p\_lighting: the probability that each lighting transform is applied
+\item
+  xtra\_tfms: a list of additional transforms you would like to be
+  applied
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}101}]:} \PY{o}{\PYZpc{}\PYZpc{}time}
+          \PY{c+c1}{\PYZsh{} Datablock}
+          \PY{n}{data} \PY{o}{=} \PY{p}{(}\PY{n}{ImageList}\PY{o}{.}\PY{n}{from\PYZus{}folder}\PY{p}{(}\PY{n}{TRAIN}\PY{p}{)} \PY{c+c1}{\PYZsh{} Change to \PYZdq{}TRAIN\PYZdq{} or \PYZdq{}LARGE\PYZdq{} as needed}
+                  \PY{o}{.}\PY{n}{split\PYZus{}by\PYZus{}rand\PYZus{}pct}\PY{p}{(}\PY{p}{)}
+                  \PY{o}{.}\PY{n}{label\PYZus{}from\PYZus{}func}\PY{p}{(}\PY{n}{get\PYZus{}labels}\PY{p}{)}
+                  \PY{o}{.}\PY{n}{transform}\PY{p}{(}\PY{n}{get\PYZus{}transforms}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{n}{sz}\PY{p}{)}
+                  \PY{o}{.}\PY{n}{databunch}\PY{p}{(}\PY{n}{bs}\PY{o}{=}\PY{n}{bs}\PY{p}{)}\PY{o}{.}\PY{n}{normalize}\PY{p}{(}\PY{n}{imagenet\PYZus{}stats}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+CPU times: user 5.08 s, sys: 19.5 ms, total: 5.1 s
+Wall time: 1.77 s
+
+    \end{Verbatim}
+
+    After successfully creating our databunch, let's look at some animals!
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}102}]:} \PY{n}{data}\PY{o}{.}\PY{n}{show\PYZus{}batch}\PY{p}{(}\PY{n}{rows}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{6}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_26_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}103}]:} \PY{n}{data}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}103}]:} ImageDataBunch;
+          
+          Train: LabelList (2944 items)
+          x: ImageList
+          Image (3, 512, 512),Image (3, 512, 512),Image (3, 512, 512),Image (3, 512, 512),Image (3, 512, 512)
+          y: CategoryList
+          saint bernard,scottish terrier,Ragdoll,wheaten terrier,japanese chin
+          Path: data/train;
+          
+          Valid: LabelList (736 items)
+          x: ImageList
+          Image (3, 512, 512),Image (3, 512, 512),Image (3, 512, 512),Image (3, 512, 512),Image (3, 512, 512)
+          y: CategoryList
+          Sphynx,Persian,boxer,shiba inu,Bengal
+          Path: data/train;
+          
+          Test: None
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}104}]:} \PY{n+nb}{len}\PY{p}{(}\PY{n}{os}\PY{o}{.}\PY{n}{listdir}\PY{p}{(}\PY{n}{LARGE}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}104}]:} 14721
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}105}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{classes}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+['Abyssinian', 'Bengal', 'Birman', 'Bombay', 'British Shorthair', 'Egyptian Mau', 'Maine Coon', 'Persian', 'Ragdoll', 'Russian Blue', 'Siamese', 'Sphynx', 'american bulldog', 'american pit bull terrier', 'basset hound', 'beagle', 'boxer', 'chihuahua', 'english cocker spaniel', 'english setter', 'german shorthaired', 'great pyrenees', 'havanese', 'japanese chin', 'keeshond', 'leonberger', 'miniature pinscher', 'newfoundland', 'pomeranian', 'pug', 'saint bernard', 'samoyed', 'scottish terrier', 'shiba inu', 'staffordshire bull terrier', 'wheaten terrier', 'yorkshire terrier']
+
+    \end{Verbatim}
+
+    Now that our databunch is setup, its time to do some modeling.
+
+    \hypertarget{modeling}{%
+\subsection{Modeling}\label{modeling}}
+
+    From testing various pretrained models and architechures out on the
+Azure VM, we saw best results with using a resnet50 architecture in a
+Convolutional Nerual Network. InceptionV3 wasnt getting nearly as good
+accuracy as Resnet50 (or Resnet34) and Vgg wasn't either.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}106}]:} \PY{n}{gc}\PY{o}{.}\PY{n}{collect}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}106}]:} 19780
+\end{Verbatim}
+            
+    Now we'll create our learner class and load in some metrics we care
+about (error rate and accuracy):
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}107}]:} \PY{n}{learn} \PY{o}{=} \PY{n}{cnn\PYZus{}learner}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{models}\PY{o}{.}\PY{n}{resnet50}\PY{p}{,} \PY{n}{metrics}\PY{o}{=}\PY{p}{(}\PY{n}{error\PYZus{}rate}\PY{p}{,}\PY{n}{accuracy}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}108}]:} \PY{n}{learn}\PY{o}{.}\PY{n}{path} \PY{o}{=} \PY{n}{PATH}
+          \PY{n}{os}\PY{o}{.}\PY{n}{system}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{mv }\PY{l+s+si}{\PYZob{}TRAIN\PYZcb{}}\PY{l+s+s2}{/models }\PY{l+s+si}{\PYZob{}PATH\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}108}]:} 256
+\end{Verbatim}
+            
+    Lets find the learning rate we'll want to use by using Fastai's lr
+finder:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}109}]:} \PY{n}{learn}\PY{o}{.}\PY{n}{lr\PYZus{}find}\PY{p}{(}\PY{p}{)}
+          \PY{n}{learn}\PY{o}{.}\PY{n}{recorder}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+<IPython.core.display.HTML object>
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+LR Finder is complete, type \{learner\_name\}.recorder.plot() to see the graph.
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_38_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}110}]:} \PY{n}{lr} \PY{o}{=} \PY{l+m+mf}{1e\PYZhy{}2}
+\end{Verbatim}
+
+
+    Time to train! After our prototying accuracy seemed to pleateau around
+15 epochs, so that's the numbe we'll go with here:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}111}]:} \PY{n}{learn}\PY{o}{.}\PY{n}{fit\PYZus{}one\PYZus{}cycle}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,} \PY{n+nb}{slice}\PY{p}{(}\PY{n}{lr}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+<IPython.core.display.HTML object>
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}112}]:} \PY{n}{learn}\PY{o}{.}\PY{n}{save}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZob{}prefix\PYZcb{}}\PY{l+s+s2}{first}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}113}]:} \PY{n}{learn}\PY{o}{.}\PY{n}{load}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZob{}prefix\PYZcb{}}\PY{l+s+s2}{first}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    To update the earlier weights in the normalized model (using imagenet
+for the normalization), we'll unfreeze all the layers and train at a
+lower learning rate:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}114}]:} \PY{n}{learn}\PY{o}{.}\PY{n}{unfreeze}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}115}]:} \PY{n}{learn}\PY{o}{.}\PY{n}{lr\PYZus{}find}\PY{p}{(}\PY{n}{start\PYZus{}lr}\PY{o}{=}\PY{l+m+mf}{1e\PYZhy{}10}\PY{p}{,} \PY{n}{end\PYZus{}lr}\PY{o}{=}\PY{l+m+mf}{1e\PYZhy{}5}\PY{p}{)}
+          \PY{n}{learn}\PY{o}{.}\PY{n}{recorder}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+<IPython.core.display.HTML object>
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+LR Finder is complete, type \{learner\_name\}.recorder.plot() to see the graph.
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_46_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}117}]:} \PY{n}{learn}\PY{o}{.}\PY{n}{fit\PYZus{}one\PYZus{}cycle}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{,} \PY{n}{max\PYZus{}lr}\PY{o}{=}\PY{n+nb}{slice}\PY{p}{(}\PY{l+m+mf}{1e\PYZhy{}10}\PY{p}{,}\PY{l+m+mf}{1e\PYZhy{}9}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{learn}\PY{o}{.}\PY{n}{save}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZob{}prefix\PYZcb{}}\PY{l+s+s2}{second}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    With \textasciitilde{}95\% validation accuracy, we were satisfied with
+our model. Now to get predictions for our test set!
+
+    \hypertarget{submission}{%
+\subsection{Submission}\label{submission}}
+
+    Since we looked at image file names and breed types, we need to write a
+function that changes the category we're looking at to \texttt{breedID}
+instead. First we'll make an infrence learner to get the predictions of
+the test set images, then feed our results into a pandas dataframe which
+will be exported into a csv for Kaggle.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}118}]:} \PY{n}{samp\PYZus{}df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{n}{PATH}\PY{o}{/}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sampleSubmission\PYZus{}breed.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{samp\PYZus{}df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}118}]:}    fname  breedID
+          0      0       23
+          1      1       35
+          2      2       19
+          3      3        2
+          4      4       29
+\end{Verbatim}
+            
+    Getting predictions for test set:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}119}]:} \PY{c+c1}{\PYZsh{} Create infrence learner}
+          \PY{n}{learn} \PY{o}{=} \PY{n}{cnn\PYZus{}learner}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{models}\PY{o}{.}\PY{n}{resnet50}\PY{p}{,} \PY{n}{metrics}\PY{o}{=}\PY{p}{(}\PY{n}{error\PYZus{}rate}\PY{p}{,}\PY{n}{accuracy}\PY{p}{)}\PY{p}{)}
+          \PY{n}{learn}\PY{o}{.}\PY{n}{path} \PY{o}{=} \PY{n}{PATH}
+          \PY{n}{os}\PY{o}{.}\PY{n}{system}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{mv }\PY{l+s+si}{\PYZob{}TRAIN\PYZcb{}}\PY{l+s+s2}{/models }\PY{l+s+si}{\PYZob{}PATH\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{n}{os}\PY{o}{.}\PY{n}{system}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{mv }\PY{l+s+si}{\PYZob{}LARGE\PYZcb{}}\PY{l+s+s2}{/models }\PY{l+s+si}{\PYZob{}PATH\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} Load best model}
+          \PY{n}{learn}\PY{o}{.}\PY{n}{load}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZob{}prefix\PYZcb{}}\PY{l+s+s2}{second}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}61}]:} \PY{c+c1}{\PYZsh{} Create Submission Dataframe}
+         \PY{n}{samp\PYZus{}data} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fname}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{p}{[}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{breedID}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{p}{[}\PY{p}{]}\PY{p}{\PYZcb{}}
+         \PY{n}{sub\PYZus{}df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{samp\PYZus{}data}\PY{p}{)}
+         \PY{n}{sub\PYZus{}df}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}61}]:} Empty DataFrame
+         Columns: [fname, breedID]
+         Index: []
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}63}]:} \PY{o}{\PYZpc{}\PYZpc{}time}
+         \PY{n}{count} \PY{o}{=} \PY{l+m+mi}{0}
+         \PY{n}{dataset} \PY{o}{=} \PY{n}{TEST}
+         
+         \PY{k}{for} \PY{n}{image} \PY{o+ow}{in} \PY{n}{os}\PY{o}{.}\PY{n}{listdir}\PY{p}{(}\PY{n}{TEST}\PY{p}{)}\PY{p}{:}    
+             \PY{c+c1}{\PYZsh{} File names}
+             \PY{n}{fname} \PY{o}{=} \PY{n}{image}\PY{p}{[}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{4}\PY{p}{]}
+             
+             \PY{c+c1}{\PYZsh{} breed\PYZus{}id predictions}
+             \PY{n}{img} \PY{o}{=} \PY{n}{open\PYZus{}image}\PY{p}{(}\PY{n+nb}{str}\PY{p}{(}\PY{n}{TEST}\PY{o}{/}\PY{n}{image}\PY{p}{)}\PY{p}{)}
+             \PY{n}{breed\PYZus{}pred} \PY{o}{=} \PY{n}{learn}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{img}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+             \PY{n}{temp\PYZus{}df} \PY{o}{=} \PY{n}{train\PYZus{}df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{train\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{breed\PYZus{}name}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZob{}breed\PYZus{}pred\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+             \PY{n}{id\PYZus{}pred} \PY{o}{=} \PY{n}{temp\PYZus{}df}\PY{o}{.}\PY{n}{values}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+             
+             \PY{n}{temp\PYZus{}data} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fname}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{p}{[}\PY{n}{fname}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{breedID}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{p}{[}\PY{n}{id\PYZus{}pred}\PY{p}{]}\PY{p}{\PYZcb{}}
+             \PY{n}{temp\PYZus{}sub\PYZus{}df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{samp\PYZus{}data}\PY{p}{)}   
+             \PY{n}{sub\PYZus{}df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{count}\PY{p}{]} \PY{o}{=} \PY{p}{[}\PY{n}{fname}\PY{p}{,} \PY{n}{id\PYZus{}pred}\PY{p}{]}
+             
+             \PY{k}{if} \PY{n}{count}\PY{o}{\PYZpc{}}\PY{l+m+mi}{250} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZob{}count\PYZcb{}}\PY{l+s+s2}{ of }\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{len(os.listdir(TEST))\PYZcb{} done.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{n}{count} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+0 of 3669 done.
+250 of 3669 done.
+500 of 3669 done.
+750 of 3669 done.
+1000 of 3669 done.
+1250 of 3669 done.
+1500 of 3669 done.
+1750 of 3669 done.
+2000 of 3669 done.
+2250 of 3669 done.
+2500 of 3669 done.
+2750 of 3669 done.
+3000 of 3669 done.
+3250 of 3669 done.
+3500 of 3669 done.
+CPU times: user 2min 20s, sys: 8.91 s, total: 2min 29s
+Wall time: 2min 31s
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}65}]:} \PY{n}{sub\PYZus{}df}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{by}\PY{o}{=}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{fname}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         \PY{n}{sub\PYZus{}df}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         \PY{n}{sub\PYZus{}df}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{index}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         \PY{n}{sub\PYZus{}df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{breedID}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{sub\PYZus{}df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{breedID}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n+nb}{int}\PY{p}{)}
+         \PY{n}{sub\PYZus{}df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}65}]:}   fname  breedID
+         0  3680     11.0
+         1  3681     30.0
+         2  3682     26.0
+         3  3683     23.0
+         4  3684     19.0
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}70}]:} \PY{n}{sub\PYZus{}df}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}70}]:} (3669, 2)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}71}]:} \PY{n}{sub\PYZus{}df}\PY{o}{.}\PY{n}{to\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{submission.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+\end{Verbatim}
+
+
+    We'll also export our model so we can use it in our Web App:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}72}]:} \PY{n}{learn}\PY{o}{.}\PY{n}{export}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{analysis}{%
+\subsection{Analysis}\label{analysis}}
+
+    Let's look at our results!
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}120}]:} \PY{n}{interp} \PY{o}{=} \PY{n}{ClassificationInterpretation}\PY{o}{.}\PY{n}{from\PYZus{}learner}\PY{p}{(}\PY{n}{learn}\PY{p}{)}
+          
+          \PY{n}{losses}\PY{p}{,}\PY{n}{idxs} \PY{o}{=} \PY{n}{interp}\PY{o}{.}\PY{n}{top\PYZus{}losses}\PY{p}{(}\PY{p}{)}
+          
+          \PY{n+nb}{len}\PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{valid\PYZus{}ds}\PY{p}{)}\PY{o}{==}\PY{n+nb}{len}\PY{p}{(}\PY{n}{losses}\PY{p}{)}\PY{o}{==}\PY{n+nb}{len}\PY{p}{(}\PY{n}{idxs}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}120}]:} True
+\end{Verbatim}
+            
+    Below are several images that our model had the most trouble on. If we
+had more time to work on this project, we'd adjust our training datset
+accordingly so that we generate more augmented images of each class
+which should help eliminate some of these losses. We can also see what
+features activated the model the most, and take that into consideration
+for future edits of this project:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}121}]:} \PY{n}{interp}\PY{o}{.}\PY{n}{plot\PYZus{}top\PYZus{}losses}\PY{p}{(}\PY{l+m+mi}{9}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,}\PY{l+m+mi}{11}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_66_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    If we look at the confusion matrix below, we can see a vizualization of
+the model's performance on all the breeds. The more linear and darker
+the line from the top right to bottom left is, the more accurate the
+model:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}122}]:} \PY{n}{interp}\PY{o}{.}\PY{n}{plot\PYZus{}confusion\PYZus{}matrix}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{12}\PY{p}{,}\PY{l+m+mi}{12}\PY{p}{)}\PY{p}{,} \PY{n}{dpi}\PY{o}{=}\PY{l+m+mi}{60}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_68_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    We can also look at what the model was most unsure about, meaning the
+activations for all the classes we were looking at were all about even,
+and the model couldn't decide on one that stood out more from the rest:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}123}]:} \PY{n}{interp}\PY{o}{.}\PY{n}{most\PYZus{}confused}\PY{p}{(}\PY{n}{min\PYZus{}val}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}123}]:} [('Egyptian Mau', 'Bengal', 3),
+           ('american bulldog', 'american pit bull terrier', 3),
+           ('chihuahua', 'miniature pinscher', 3),
+           ('Ragdoll', 'Birman', 2),
+           ('chihuahua', 'american pit bull terrier', 2),
+           ('newfoundland', 'Bombay', 2)]
+\end{Verbatim}
+            
+    And thats it! For a more indepth write-up see the writeup below. We had
+a lot of fun making this project and learned a lot with uzing Azure VM
+servicies, TF 2.0, Pytoch, and Fastai. We'll definetly be looking to
+attend Datathon next year!
+
+    \textbf{Complete Writeup}
+
+Before beginning model development and optimization, we wanted to
+determine what model architecture would produce the results we were
+looking for while also providing efficient use of memory during
+inference. After discussion, we decided to take the transfer learning
+approach to this problem. We wanted to take a proven model architecture
+and repurpose it for this classification task. We narrowed down possible
+models to use to 3 choices: VGG19, Google Inception v3, and ResNet50.
+
+Next, Tanveer compiled all 3 models in Keras with additional layers for
+output and prepared the data for training in a simpler fashion than
+Wayde's final model. Tanveer scaled down every image to be a resolution
+below 800 x 800 and created an 800 x 800 blank image with the animal
+image inserted into the corner. This allowed for easy standardization of
+image resolutions for training the models. Once the images were
+transformed, he pickled them so that this intensive routine would not
+have to be redone for each model's benchmark.
+
+Once the preparation was complete, Tanveer began to train the models.
+Unfortunately, he was hindered by the hardware limitations of his own
+computer. In order to quickly acquire benchmarks to assist Wayde in
+optimizing results, Tanveer trained the models initially using
+Stochastic Gradient Descent and only 3 epochs. Initially, this gave us
+confounding results. However, after some hyperparameter and architecture
+tweaking, we began to see validation accuracies for the 3 models ranging
+from 70-85\%. Based on our results, we decided to proceed with ResNet50
+network, and Wayde began intensive model development.
+
+While Wayde was developing the ResNet50 model, Tanveer continued to
+tweak the Keras models and see if he could get any better results that
+could inform Wayde's optimization efforts. Tanveer began working with a
+Microsoft Azure virtual machine instance to train the models without
+having to rely on his laptop's lack of memory. Unfortunately, the best
+virtual machine instance that Tanveer could utilize was not much of an
+improvement from his own laptop. The instance was a lot less cluttered
+than his laptop, so this allowed for slightly more intensive training
+that could yield more useful results. During this process, Tanveer ran
+into more some Tensorflow version problem and problems with limited
+memory in training. After much struggle, Tanveer was only able to
+successfully get through 2 training sessions for the VGG19 model with
+Azure and then proceeded to assist George.
+
+After we trained the model and felt confident of predictions, we
+transitioned to creating a web application that would eventually be
+streamed through Microsoft Azure Services. We wanted to use Microsoft
+Azure Services to publicly display our findings through an accessible
+URL, which is also scalable.
+
+We first developed the application locally, to see if there was an
+adequate amount of time to accomplish what we set out, and managed to
+create a single page website that was capable of taking in a file of an
+animal in the first dataset and outputting the specific species and type
+of the dog or cat. Through this web application, we wanted to show our
+audience the applicability of data science on real world objects and
+tasks of classifying objects, and even though the ability to classify 40
+species of dogs and cats is limiting, we can transition an image
+classifier to a grander scheme of applications.
+
+Throughout this process of researching Microsoft Azure's API and Cloud
+Platform, we faced many struggles with setting up our Virtual Machines
+to have enough computing power and setting up the webapp instance
+through our local platform. Although this datathon is nearing its end,
+we were able to host our classifier through another platform, which can
+be viewed through: https://mypetbreed.onrender.com/
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
