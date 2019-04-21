@@ -1,6 +1,6 @@
 # Datathon 2019
 **Wayde Gilliam | Tanveer Mittal | George Pu**
-*Team Beeg Data*
+Team: *Beeg Data*
 
 Here's our submission for Datathon 2019! It's a classifier for pet breeds with a working web app. 
 
