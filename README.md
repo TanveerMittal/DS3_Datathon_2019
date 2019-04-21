@@ -1,7 +1,8 @@
-# Starter for deploying [fast.ai](https://www.fast.ai) models on [Render](https://render.com)
+# Datathon 2019
+**Wayde Gilliam | Tanveer Mittal | George Pu**
+*Team Beeg Data*
 
-This repo can be used as a starting point to deploy [fast.ai](https://github.com/fastai/fastai) models on Render.
+Here's our submission for Datathon 2019! It's a classifier for pet breeds with a working web app. 
 
-The sample app described here is up at https://fastai-v3.onrender.com. Test it out with bear images!
-
-The guide for production deployment to Render is at https://course.fast.ai/deployment_render.html.
+# See our main notebook for our project writeup
+# https://github.com/TanveerMittal/DS3_Datathon_2019/blob/master/modeling/01_multiclass_waydegg.ipynb
